@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculate Carbon Footprint</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .flex-col {
+      flex-direction: column;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .h-88vh {
+      height: 88vh;
+    }
+
+    .text-4xl {
+      font-size: 2.25rem;
+    }
+
+    .mt-9 {
+      margin-top: 2.25rem;
+    }
+
+    .ml-20 {
+      margin-left: 5rem;
+    }
+
+    .mr-20 {
+      margin-right: 5rem;
+    }
+
+    .mt-7 {
+      margin-top: 1.75rem;
+    }
+
+    .p-4 {
+      padding: 1rem;
+    }
+
+    .border {
+      border: 1px solid #ccc;
+    }
+
+    .shadow-lg {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .block {
+      display: block;
+    }
+
+    .text-lg {
+      font-size: 1.125rem;
+    }
+
+    .font-medium {
+      font-weight: 500;
+    }
+
+    .text-gray-700 {
+      color: #4a5568;
+    }
+
+    .mb-2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .px-4 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .py-1 {
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+    }
+
+    .bg-gray-50 {
+      background-color: #f9fafb;
+    }
+
+    .border-gray-300 {
+      border-color: #d2d6dc;
+    }
+
+    .rounded-xl {
+      border-radius: 0.75rem;
+    }
+
+    .shadow-sm {
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    .focus\:outline-none {
+      outline: none;
+    }
+
+    .focus\:ring-green-100 {
+      box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
+    }
+
+    .focus\:border-green-500 {
+      border-color: #38a169;
+    }
+
+    .mt-5 {
+      margin-top: 1.25rem;
+    }
+
+    .rounded-lg {
+      border-radius: 0.5rem;
+    }
+
+    .text-white {
+      color: white;
+    }
+
+    .bg-green-500 {
+      background-color: #48bb78;
+    }
+
+    .hover\:bg-green-700:hover {
+      background-color: #2f855a;
+    }
+
+    .text-red-600 {
+      color: #e53e3e;
+    }
+
+    .font-bold {
+      font-weight: 700;
+    }
+
+    .mt-10 {
+      margin-top: 2.5rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <!-- Add your header content here -->
+  </header>
+
+  <div class="flex flex-col h-88vh text-center">
+    <h1 class="text-4xl mt-9">Calculate Carbon Footprint</h1>
+    <form
+      action="/predict"
+      method="POST"
+      class="h-60vh ml-20 mr-20 mt-7 flex flex-col justify-start items-center gap-1 p-4 border shadow-lg"
+      onsubmit="handleSubmit(event)"
+    >
+      <label class="block text-lg font-medium text-gray-700 mb-2">Select type of coal</label>
+      <select class="px-4 py-1 bg-gray-50 border border-gray-300 text-gray-700 rounded-xl shadow-sm focus:outline-none focus:ring-green-100 focus:border-green-500">
+        <option value="anthracite">Anthracite</option>
+        <option value="bituminous">Bituminous</option>
+        <option value="lignit">Lignit</option>
+        <option value="subbituminous">Subbituminous</option>
+      </select>
+
+      <label class="block text-lg font-medium text-gray-700 mb-2">Amount of Coal:</label>
+      <input
+        type="number"
+        placeholder="in kilograms"
+        class="px-4 py-1 bg-gray-50 border border-gray-300 text-gray-700 rounded-xl shadow-sm focus:outline-none focus:ring-green-100 focus:border-green-500"
+      />
+
+      <button type="submit" class="px-4 py-2 mt-5 rounded-lg border border-gray-900 text-white bg-green-500 hover:bg-green-700/95">
+        Submit
+      </button>
+
+      <div id="modle" class="text-red-600 font-bold text-center mt-10 hidden">
+        <h1>
+          Connect Model To Calculate !!
+        </h1>
+      </div>
+    </form>
+  </div>
+
+  <!-- <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      console.log('btn clicked');
+      document.getElementById('modle').classList.remove('hidden');
+    }
+  </script> -->
+
+</body>
+
+</html>
