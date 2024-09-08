@@ -10,7 +10,7 @@ function Header() {
     };
 
     return (
-        <header className="bg-gradient-to-r from-green-600 to-emerald-600 shadow-md py-4 px-6">
+        <header className="bg-gradient-to-r from-cyan-700 to-emerald-500 shadow-md py-4 px-6">
             <div className="container mx-auto flex justify-between items-center px-6">
                 <ul className='flex gap-4 items-center'>
                     {/* Logo */}
@@ -78,7 +78,7 @@ function Header() {
                 <div className="hidden md:block">
                     <Link
                         to="/signup"
-                        className="bg-lime-500 text-white px-5 py-2 rounded-full font-semibold hover:bg-lime-600 transition duration-300"
+                        className="bg-emerald-500 text-white px-5 py-2 rounded-full font-semibold hover:bg-lime-600 transition duration-300"
                     >
                         Sign Up
                     </Link>

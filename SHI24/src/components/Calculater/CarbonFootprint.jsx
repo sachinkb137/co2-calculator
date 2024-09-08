@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-function CarbonFootprint() {
+import bg from '../../assets/bg.jpg'
 
+function CarbonFootprint() {
     const [result, setResult] = useState(null);
     const [error, setError] = useState(null);
-
     const [kg, setKg] = useState('');
     const [coalType, setCoalType] = useState('');
+    const [population, setPopulation] = useState('');
 
     const handleCalculate = (event) => {
         event.preventDefault();
@@ -16,6 +17,7 @@ function CarbonFootprint() {
         axios.post('http://localhost:5000/calculate', {
             coal_type: coalType,
             kg: parseFloat(kg),
+            population: parseFloat(population),
         }, {
             headers: {
                 'Content-Type': 'application/json'
@@ -34,8 +36,14 @@ function CarbonFootprint() {
     }
 
     return (
-        <div className=' flex flex-col items-center justify-center min-h-screen bg-gray-100'>
-            <div className='w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8'>
+        <div
+            className='flex flex-col items-center justify-center min-h-screen bg-gray-100'
+            style={{
+                backgroundImage: `url(${bg})`,
+                backgroundSize: 'cover'
+            }}
+        >
+            <div className='w-full max-w-2xl bg-white/50 backdrop-blur-sm rounded-2xl shadow-lg shadow-black p-8'>
                 <h1 className='text-3xl font-bold text-gray-800 mb-8 text-center'>Calculate Carbon Footprint</h1>
                 <form className='space-y-6' onSubmit={handleCalculate}>
                     {/* Coal Type Input */}
@@ -68,6 +76,19 @@ function CarbonFootprint() {
                         />
                     </div>
 
+                    {/* Population Input */}
+                    <div>
+                        <label className='block text-lg font-medium text-gray-700 mb-2'>Population</label>
+                        <input
+                            type="number"
+                            placeholder='Enter population'
+                            className='w-full px-4 py-2 bg-gray-50 border border-gray-300 text-gray-700 rounded-lg shadow-sm focus:outline-none focus:ring-green-100 focus:border-green-500'
+                            value={population}
+                            onChange={(e) => setPopulation(e.target.value)}
+                            required
+                        />
+                    </div>
+
                     {/* Submit Button */}
                     <button
                         type="submit"
@@ -90,6 +111,7 @@ function CarbonFootprint() {
                             <p className='text-lg text-gray-800'><strong>Total Emission:</strong> {result.total_emission} kg</p>
                             <p className='text-lg text-gray-800'><strong>Reduced Emission:</strong> {result.reduced_emission} kg</p>
                             <p className='text-lg text-gray-800'><strong>Reduction Percentage:</strong> {result.reduction_percentage}%</p>
+                            <p className='text-lg text-gray-800'><strong>Per Capita Emission:</strong> {result.per_capita_emission} kg</p>
                         </div>
 
                         <h3 className='text-xl font-semibold text-gray-800 text-center mt-8'>Emission Reduction Graph</h3>

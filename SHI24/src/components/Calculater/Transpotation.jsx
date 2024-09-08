@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import transBg from '../../assets/transBg.jpg'
 
 const EMISSION_FACTOR = 2.68;
 
@@ -57,8 +58,16 @@ const Transportation = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-8">
-            <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
+        <div
+            className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-8"
+            style={
+                {
+                    backgroundImage: `url(${transBg})`,
+                    backgroundSize: 'cover'
+                }
+            }
+        >
+            <div className="bg-white/50 backdrop-blur-sm shadow-2xl shadow-black rounded-2xl p-8 w-full max-w-lg">
                 <h1 className="text-2xl font-bold mb-6">Transportation CO₂ Emission Calculator</h1>
                 <div className="mb-4">
                     <label className="block text-gray-700 mb-2">Select Vehicle</label>

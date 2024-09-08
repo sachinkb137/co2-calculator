@@ -9,8 +9,7 @@ app = Flask(__name__)
 CORS(app, supports_credentials=True, allow_headers=['Content-Type'], resources={r"/calculate": {"origins": "http://localhost:5173"}})
 
 # Function to calculate emissions based on coal type
-def calculate(kg, coal, factor):
-
+def calculate(kg, coal, factor, population):
     x = coal[[0]]
     y = coal[1]
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=46)
@@ -25,6 +24,9 @@ def calculate(kg, coal, factor):
     ReduceEmission = lr.predict([[kg]])[0]
 
     reduce_percentage = round((ReduceEmission / TotalEmission) * 100, 2)
+    
+    # Calculate per capita emissions
+    per_capita_emission = TotalEmission / population if population > 0 else 0
 
     graph_data = {
         'kg_values': kg_values.tolist(),
@@ -36,6 +38,7 @@ def calculate(kg, coal, factor):
         'total_emission': round(TotalEmission, 2),
         'reduced_emission': round(ReduceEmission, 2),
         'reduction_percentage': reduce_percentage,
+        'per_capita_emission': round(per_capita_emission, 2),
         'graph_data': graph_data
     }
 
@@ -47,15 +50,19 @@ def calculate_emission():
 
         print('====> data received', data)
 
-        # Check for required fields: coal_type and kg
-        if not data or 'coal_type' not in data or 'kg' not in data:
-            return jsonify({'error': 'Missing required fields: coal_type and kg'}), 400
+        # Check for required fields: coal_type, kg, and population
+        if not data or 'coal_type' not in data or 'kg' not in data or 'population' not in data:
+            return jsonify({'error': 'Missing required fields: coal_type, kg, and population'}), 400
 
         coal_type = data['coal_type']
         kg = data.get('kg')
+        population = data.get('population')
 
         if not isinstance(kg, (int, float)) or kg <= 0:
             return jsonify({'error': 'Invalid kg value'}), 400
+
+        if not isinstance(population, (int, float)) or population <= 0:
+            return jsonify({'error': 'Invalid population value'}), 400
 
         # Coal emission calculation logic
         if coal_type == 'antracite':
@@ -86,7 +93,7 @@ def calculate_emission():
             return jsonify({'error': 'Invalid coal type'}), 400
 
         # Call the calculation function for coal emissions
-        result = calculate(kg, coal_data, factor)
+        result = calculate(kg, coal_data, factor, population)
 
         return jsonify(result)
     

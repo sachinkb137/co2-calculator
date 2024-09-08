@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import electricBg from '../../assets/elecBg.jpg'
 
 function Electricity() {
   const [unit, setUnit] = useState(0);
@@ -36,10 +37,18 @@ function Electricity() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center py-10 px-4">
-      <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-8 space-y-8">
+    <div
+      className="min-h-screen bg-gray-100 flex flex-col items-center justify-center py-10 px-4"
+      style={
+        {
+          backgroundImage: `url(${electricBg})`,
+          backgroundSize: 'cover'
+        }
+      }
+    >
+      <div className="w-full max-w-4xl bg-white/70 backdrop-blur-sm shadow-lg shadow-black rounded-2xl p-8 space-y-8">
         <h1 className="text-3xl font-bold text-center text-gray-800">CO2 Emissions Calculator</h1>
-        
+
         {/* Electricity Section */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold text-gray-700">Electricity CO2 Emissions</h2>

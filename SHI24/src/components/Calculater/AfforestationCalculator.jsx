@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import seqBg from '../../assets/seq3.jpeg'
 
 const COAL_EMISSION_FACTOR = 2.4;
 const SEQUESTRATION_RATE_PER_TREE = 0.015;
@@ -50,12 +51,20 @@ const AfforestationCalculator = () => {
     };
 
     return (
-        <div className="min-h-screen bg-green-50 flex items-center justify-center py-10">
-            <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
-                <h1 className="text-2xl font-bold text-center text-green-600 mb-6">
+        <div
+            className="min-h-screen bg-green-50 flex items-center justify-center py-10"
+            style={
+                {
+                    backgroundImage: `url(${seqBg})`,
+                    backgroundSize: 'cover'
+                }
+            }
+        >
+            <div className="w-full max-w-md bg-white/40 backdrop-blur-sm rounded-2xl shadow-lg shadow-black p-6">
+                <h1 className="text-2xl font-bold text-center text-black mb-6">
                     Coal Emissions Offset Calculator
                 </h1>
-                <label className="block text-gray-700 font-medium mb-2">
+                <label className="block text-gray-900 font-medium mb-2">
                     Enter the amount of coal burned (in tons):
                 </label>
                 <input
@@ -64,7 +73,7 @@ const AfforestationCalculator = () => {
                     onChange={(e) => setCoalBurned(e.target.value)}
                     className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
-                <label className="block text-gray-700 font-medium mb-2">
+                <label className="block text-gray-900 font-medium mb-2">
                     Enter the number of years for afforestation:
                 </label>
                 <input
